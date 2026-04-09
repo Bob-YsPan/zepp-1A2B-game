@@ -1,0 +1,225 @@
+{
+  "configVersion": "v2",
+  "app": {
+    "appId": 26684,
+    "appName": "Stopwatch Game!",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "1.0.1"
+    },
+    "icon": "icon.png",
+    "vender": "ys-studio",
+    "description": "Small game that you can guess the current stopwatch value!"
+  },
+  "permissions": [
+    "data:os.device.info",
+    "device:os.local_storage"
+  ],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "2.0.0",
+      "target": "2.0.0",
+      "minVersion": "2.0"
+    }
+  },
+  "debug": false,
+  "targets": {
+    "round-360-Apollo": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "activeedge-cn", "deviceSource": 8388864 },
+        { "name": "activeedge", "deviceSource": 8388865 }
+      ],
+      "designWidth": 466
+    },
+    "round-416-MHS": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "gtrmini", "deviceSource": 251 }
+      ],
+      "designWidth": 466
+    },
+    "round-416-NXP": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "falcon-cn", "deviceSource": 414 },
+        { "name": "falcon", "deviceSource": 415 }
+      ],
+      "designWidth": 466
+    },
+    "round-454-NXP": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "cheetah-round-cn", "deviceSource": 8192256 },
+        { "name": "cheetah-round", "deviceSource": 8192257 },
+        { "name": "trexultra-cn", "deviceSource": 6553856 },
+        { "name": "trexultra", "deviceSource": 6553857 },
+        { "name": "trex2-cn", "deviceSource": 418 },
+        { "name": "trex2", "deviceSource": 419 }
+      ],
+      "designWidth": 466
+    },
+    "round-466-MHS": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "active2-round-cn", "deviceSource": 8913152 },
+        { "name": "active2-round", "deviceSource": 8913153 },
+        { "name": "active2-round-w1", "deviceSource": 8913155 },
+        { "name": "active2-round-w2", "deviceSource": 8913159 },
+        { "name": "active2-round-2024-cn", "deviceSource": 10092800 },
+        { "name": "active2-round-2024", "deviceSource": 10092801 },
+        { "name": "active2-round-2024-w1", "deviceSource": 10092803 },
+        { "name": "active2-round-2024-w2", "deviceSource": 10092807 },
+        { "name": "active3premium-cn", "deviceSource": 10944768 },
+        { "name": "active3premium", "deviceSource": 10944769 },
+        { "name": "active3premium-w", "deviceSource": 10944771 },
+        { "name": "active3premium-w2", "deviceSource": 10948867 },
+        { "name": "trex3pro44-cn", "deviceSource": 10682624 },
+        { "name": "trex3pro44", "deviceSource": 10682625 },
+        { "name": "trex3pro44-w", "deviceSource": 10682627 }
+      ],
+      "designWidth": 466
+    },
+    "round-466-NXP": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "gtr4-cn", "deviceSource": 7930112 },
+        { "name": "gtr4", "deviceSource": 7930113 },
+        { "name": "gtr4-w1", "deviceSource": 7864577 }
+      ],
+      "designWidth": 466
+    },
+    "round-480-MHS": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "activemax-cn", "deviceSource": 10813697 },
+        { "name": "activemax", "deviceSource": 10813699 },
+        { "name": "balance2-cn", "deviceSource": 9568512 },
+        { "name": "balance2", "deviceSource": 9568513 },
+        { "name": "balance2-w", "deviceSource": 9568515 },
+        { "name": "trex3-cn", "deviceSource": 8716544 },
+        { "name": "trex3", "deviceSource": 8716545 },
+        { "name": "trex3-w", "deviceSource": 8716547 },
+        { "name": "trex3pro48-cn", "deviceSource": 10551552 },
+        { "name": "trex3pro48", "deviceSource": 10551553 },
+        { "name": "trex3pro48-w", "deviceSource": 10551555 },
+        { "name": "trexultra2-cn", "deviceSource": 10879232 },
+        { "name": "trexultra2", "deviceSource": 10879233 },
+        { "name": "trexultra2-w", "deviceSource": 10879235 }
+      ],
+      "designWidth": 466
+    },
+    "round-480-NXP": {
+      "module": {
+        "page": {
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "balance-cn", "deviceSource": 8519936 },
+        { "name": "balance", "deviceSource": 8519937 },
+        { "name": "balance-w", "deviceSource": 8519939 },
+        { "name": "cheetah-pro-cn", "deviceSource": 8126720 },
+        { "name": "cheetah-pro", "deviceSource": 8126721 }
+      ],
+      "designWidth": 466
+    },
+    "square-320-Apollo": {
+      "module": {
+        "page": {
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "bip5-cn", "deviceSource": 8454400 },
+        { "name": "bip5", "deviceSource": 8454401 },
+        { "name": "bip5unity-cn", "deviceSource": 8782081 },
+        { "name": "bip5unity-w1", "deviceSource": 8782088 },
+        { "name": "bip5unity-w2", "deviceSource": 8782089 }
+      ],
+      "designWidth": 390
+    },
+    "square-390-Apollo": {
+      "module": {
+        "page": {
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "active-cn", "deviceSource": 8323328 },
+        { "name": "active", "deviceSource": 8323329 }
+      ],
+      "designWidth": 390
+    },
+    "square-390-MHS": {
+      "module": {
+        "page": {
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "active2-square-cn", "deviceSource": 10223872 },
+        { "name": "active2-square", "deviceSource": 10223873 },
+        { "name": "active2-square-w", "deviceSource": 10223875 },
+        { "name": "bip6-cn", "deviceSource": 9765120 },
+        { "name": "bip6", "deviceSource": 9765121 },
+        { "name": "bip6-w", "deviceSource": 10158337 }
+      ],
+      "designWidth": 390
+    },
+    "square-390-NXP": {
+      "module": {
+        "page": {
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+        }
+      },
+      "platforms": [
+        { "name": "cheetah-square", "deviceSource": 8257793 },
+        { "name": "gts4-cn", "deviceSource": 7995648 },
+        { "name": "gts4", "deviceSource": 7995649 }
+      ],
+      "designWidth": 390
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "Stopwatch Game!"
+    },
+    "zh-TW": {
+      "appName": "碼錶遊戲!"
+    },
+    "zh-CN": {
+      "appName": "秒表游戏!"
+    }
+  },
+  "defaultLanguage": "en-US"
+}
