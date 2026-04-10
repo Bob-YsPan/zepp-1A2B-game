@@ -2,19 +2,19 @@ msgid "easyBtn"
 msgstr "简单"
 
 msgid "easyHint"
-msgstr "3秒倒数后启动秒表,\n需在1~10秒后停止"
+msgstr "固定3秒倒数启动,完全提示,\n目标1~10秒"
 
 msgid "mediumBtn"
 msgstr "中等"
 
 msgid "mediumHint"
-msgstr "随机在1~5秒后启动秒表,\n需在10~30秒后停止"
+msgstr "随机1~5秒后启动,震动提示,\n目标10~30秒"
 
 msgid "hardBtn"
 msgstr "困难"
 
 msgid "hardHint"
-msgstr "随机在1~5秒后启动秒表,\n需停止在带小数点的秒数!"
+msgstr "随机1~5秒后启动,无提示,\n目标时间含小数!"
 
 msgid "gameTitle"
 msgstr "尝试在以下时间\n停止秒表"
@@ -29,7 +29,7 @@ msgid "countdownBefore"
 msgstr " "
 
 msgid "countdownAfter"
-msgstr "后启动秒表"
+msgstr " 后启动秒表"
 
 msgid "countdownHide"
 msgstr "准备好了吗?"

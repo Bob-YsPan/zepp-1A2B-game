@@ -1,7 +1,7 @@
 {
   "configVersion": "v2",
   "app": {
-    "appId": 26684,
+    "appId": 1111327,
     "appName": "Stopwatch Game!",
     "appType": "app",
     "version": {
@@ -10,7 +10,7 @@
     },
     "icon": "icon.png",
     "vender": "ys-studio",
-    "description": "Small game that you can guess the current stopwatch value!"
+    "description": "Test your sense of time!"
   },
   "permissions": [
     "data:os.device.info",

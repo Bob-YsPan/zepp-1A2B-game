@@ -2,19 +2,19 @@ msgid "easyBtn"
 msgstr "Easy"
 
 msgid "easyHint"
-msgstr "Starts in 3s with hints,\nstops at 1~10s"
+msgstr "Fixed 3s count to start,\nAll hints, 1~10s targets"
 
 msgid "mediumBtn"
 msgstr "Medium"
 
 msgid "mediumHint"
-msgstr "Starts in 1~5s,\nstops at 10~30s"
+msgstr "Starts in 1~5s randomly,\nVib hints, 10~30s targets"
 
 msgid "hardBtn"
 msgstr "Hard"
 
 msgid "hardHint"
-msgstr "Starts in 1~5s,\nstops at decimals only!"
+msgstr "Starts in 1~5s randomly,\nNo hints, decimal targets!"
 
 msgid "gameTitle"
 msgstr "Try to stop the stopwatch at"
@@ -26,7 +26,7 @@ msgid "newgameHint"
 msgstr "Press button or swipe to start the new game!"
 
 msgid "countdownBefore"
-msgstr "Stopwatch starts in"
+msgstr "Stopwatch starts in "
 
 msgid "countdownAfter"
 msgstr " "

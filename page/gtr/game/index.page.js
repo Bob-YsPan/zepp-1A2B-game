@@ -79,50 +79,72 @@ Page({
     spacer = viewContainer.createWidget(widget.TEXT, {
       ...SPACER_STYLE
     })
-    if(params.diffcult == 1) {
-      countdown_t = 3;
+  const { diffcult } = params;
+
+  // 1. 統一初始化變數 (單位統一為 ms)
+  switch (diffcult) {
+    case 1:
+      countdown_t = 3000;
       guess_time = Math.floor(Math.random() * 10) + 1;
-    }
-    else {
-      countdown_t  = Math.floor(Math.random() * 5) + 1;
-      if (params.diffcult == 2) {
-        guess_time = Math.floor(Math.random() * 21) + 10;
-      } else {
-        do {
-          guess_time = Number((( Math.floor(Math.random() * 201) + 100 ) / 10).toFixed(1));
-        } while (guess_time % 1 == 0)
-      }
-    }
-    
-    text_title.setProperty(prop.MORE, { text: getText("gameTitle") });
-    text_main.setProperty(prop.MORE, { text: `${guess_time}s` });
-    if(params.diffcult == 1) {
-      text_third.setProperty(prop.MORE, { text: `${getText("countdownBefore")} ${countdown_t}s ${getText("countdownAfter")}!` });
-    } else {
-      text_third.setProperty(prop.MORE, { text: getText("countdownHide") });
-    }
-    for (let i = countdown_t; i >= 1; i--) {
-      const delay = (countdown_t - i) * 1000; 
-      setTimeout(function() {
-        if(params.diffcult == 1) {
-          text_third.setProperty(prop.MORE, { 
-            text: `${getText("countdownBefore")} ${i}s ${getText("countdownAfter")}!` 
-          });
-          vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE)
-          vibrator.start();
-        }
+      break;
+    case 2:
+      countdown_t = (Math.floor(Math.random() * 5) + 1) * 1000;
+      guess_time = Math.floor(Math.random() * 21) + 10;
+      break;
+    default: // 難度 3 或其他
+      countdown_t = Math.floor(Math.random() * 4001) + 1000;
+      do {
+        guess_time = Number(((Math.floor(Math.random() * 201) + 100) / 10).toFixed(1));
+      } while (guess_time % 1 === 0); // 確保是小數
+      break;
+  }
+  // 2. 共通 UI 更新
+  text_title.setProperty(prop.MORE, { text: getText("gameTitle") });
+  text_main.setProperty(prop.MORE, { text: `${guess_time}s` });
+
+  // 3. 處理倒數顯示邏輯
+  if (diffcult === 1) {
+    const seconds = countdown_t / 1000;
+    // 設置初始顯示
+    text_third.setProperty(prop.MORE, { 
+      text: `${getText("countdownBefore")}${seconds}s${getText("countdownAfter")}!` 
+    });
+
+    // 建立每一秒的計時器
+    for (let i = seconds; i >= 1; i--) {
+      const delay = (seconds - i) * 1000;
+      setTimeout(() => {
+        text_third.setProperty(prop.MORE, {
+          text: `${getText("countdownBefore")}${i}s${getText("countdownAfter")}!`
+        });
+        vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
+        vibrator.start();
       }, delay);
     }
-    setTimeout(() => {
-      text_third.setProperty(prop.MORE, { 
-          text: getText("stopgameHint") 
-      });
-      start_ts = Date.now();
-      console.log(start_ts);
-      stopwatch_starts = true;
-      vibrator.setMode(VIBRATOR_SCENE_SHORT_STRONG)
-      vibrator.start();
-    }, countdown_t * 1000);
+  } else {
+    // 難度 2 與 3 隱藏倒數
+    text_third.setProperty(prop.MORE, { text: getText("countdownHide") });
+    if (diffcult === 2) {
+      const seconds = countdown_t / 1000;
+    for (let i = seconds; i >= 1; i--) {
+      const delay = (seconds - i) * 1000;
+      setTimeout(() => {
+        vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
+        vibrator.start();
+      }, delay);
+      }
+    }
+  }
+  // 4. 遊戲正式開始的定時任務
+  setTimeout(() => {
+    text_third.setProperty(prop.MORE, { text: getText("stopgameHint") });
+    start_ts = Date.now();
+    stopwatch_starts = true;
+    console.log(start_ts);
+    
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_STRONG);
+    vibrator.start();
+  }, countdown_t);
   },
   onInit(p) {
     logger.debug("page onInit invoked");

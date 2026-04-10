@@ -2,19 +2,19 @@ msgid "easyBtn"
 msgstr "簡單"
 
 msgid "easyHint"
-msgstr "3秒倒數後啟動碼錶,\n需在1~10秒後停止"
+msgstr "固定3秒倒數啟動,完全提示,\n目標1~10秒"
 
 msgid "mediumBtn"
 msgstr "中等"
 
 msgid "mediumHint"
-msgstr "隨機在1~5秒後啟動碼錶,\n需在10~30秒後停止"
+msgstr "隨機1~5秒後啟動,震動提示,\n目標10~30秒"
 
 msgid "hardBtn"
 msgstr "困難"
 
 msgid "hardHint"
-msgstr "隨機在1~5秒後啟動碼錶,\n需停止在帶小數點的秒數!"
+msgstr "隨機1~5秒後啟動,無提示,\n目標時間含小數!"
 
 msgid "gameTitle"
 msgstr "嘗試在以下時間\n停止碼錶"
@@ -29,7 +29,7 @@ msgid "countdownBefore"
 msgstr " "
 
 msgid "countdownAfter"
-msgstr "後啟動碼錶"
+msgstr " 後啟動碼錶"
 
 msgid "countdownHide"
 msgstr "準備好了嗎?"
