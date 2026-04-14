@@ -2,19 +2,19 @@ msgid "easyBtn"
 msgstr "Easy"
 
 msgid "easyHint"
-msgstr "Fixed 3s count to start,\nAll hints, 1~10s targets"
+msgstr "Guess numbers between 1~5, unlimited chances"
 
 msgid "mediumBtn"
 msgstr "Medium"
 
 msgid "mediumHint"
-msgstr "Starts in 1~5s randomly,\nVib hints, 10~30s targets"
+msgstr "Guess numbers between 1~10, unlimited chances"
 
 msgid "hardBtn"
 msgstr "Hard"
 
 msgid "hardHint"
-msgstr "Starts in 1~5s randomly,\nNo hints, decimal targets!"
+msgstr "Guess numbers between 1~10,\nOnly 10 times of the chances!"
 
 msgid "gameTitle"
 msgstr "Try to stop the stopwatch at"

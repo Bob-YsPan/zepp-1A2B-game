@@ -26,8 +26,8 @@ export const BTN_EASY_STYLE = {
   h: px(72), 
   text_size: 36,
   radius: 12,
-  normal_color: 0x93bf72,
-  press_color: 0xd8f7c1,
+  normal_color: 0xc6701b,
+  press_color: 0xffc285,
   text: getText("easyBtn"),
   ...ALIGN
 }
@@ -51,8 +51,8 @@ export const BTN_MEDIUM_STYLE = {
   h: px(72), 
   text_size: 36,
   radius: 12,
-  normal_color: 0x93bf72,
-  press_color: 0xd8f7c1,
+  normal_color: 0xc6701b,
+  press_color: 0xffc285,
   text: getText("mediumBtn"),
   ...ALIGN
 }
@@ -76,8 +76,8 @@ export const BTN_HARD_STYLE = {
   h: px(72), 
   text_size: 36,
   radius: 12,
-  normal_color: 0x93bf72,
-  press_color: 0xd8f7c1,
+  normal_color: 0xc6701b,
+  press_color: 0xffc285,
   text: getText("hardBtn"),
   ...ALIGN
 }
