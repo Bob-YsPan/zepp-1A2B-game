@@ -1,8 +1,8 @@
 {
   "configVersion": "v2",
   "app": {
-    "appId": 1111327,
-    "appName": "Stopwatch Game!",
+    "appId": 1111328,
+    "appName": "1A2B",
     "appType": "app",
     "version": {
       "code": 1,
@@ -10,7 +10,7 @@
     },
     "icon": "icon.png",
     "vender": "ys-studio",
-    "description": "Test your sense of time!"
+    "description": "1A2B Guess Number Game"
   },
   "permissions": [
     "data:os.device.info",
@@ -212,13 +212,13 @@
   },
   "i18n": {
     "en-US": {
-      "appName": "Stopwatch Game!"
+      "appName": "1A2B"
     },
     "zh-TW": {
-      "appName": "碼錶遊戲!"
+      "appName": "1A2B"
     },
     "zh-CN": {
-      "appName": "秒表游戏!"
+      "appName": "1A2B"
     }
   },
   "defaultLanguage": "en-US"
