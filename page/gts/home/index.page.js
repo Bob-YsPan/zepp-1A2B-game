@@ -4,7 +4,7 @@ import { BTN_EASY_STYLE, BTN_MEDIUM_STYLE, BTN_HARD_STYLE, TEXT_EASY_STYLE, TEXT
 import { push } from '@zos/router'
 
 
-const logger = Logger.getLogger("zepp-stopwatch-game");
+const logger = Logger.getLogger("zepp-1a2b-game");
 
 Page({
   build() {

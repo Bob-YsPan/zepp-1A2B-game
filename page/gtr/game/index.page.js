@@ -7,7 +7,7 @@ import { Vibrator, VIBRATOR_SCENE_SHORT_MIDDLE, VIBRATOR_SCENE_SHORT_STRONG } fr
 import { px } from '@zos/utils'
 import { getText } from '@zos/i18n'
 
-const logger = Logger.getLogger("zepp-stopwatch-game");
+const logger = Logger.getLogger("zepp-1a2b-game");
 text_title = null;
 text_main = null;
 text_third = null;
