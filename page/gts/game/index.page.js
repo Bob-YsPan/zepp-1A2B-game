@@ -20,44 +20,114 @@ let btn_clr, btn_pad0, btn_send;
 let btn_history, btn_newgame;
 
 current_index = 0;
+guess_arr = [20, 20, 20, 20];
 
 // difficult
 gamemode = 0;
 
 function handle_keypad(key_id) {
-  logger.log(`handle key ${key_id}, index ${current_index}`);
   input_btns = [btn_num1, btn_num2, btn_num3, btn_num4];
+  i_btn_styles = [BTN_NUM1_STYLE, BTN_NUM2_STYLE, BTN_NUM3_STYLE, BTN_NUM4_STYLE];
+  max_num = 9
+  if(gamemode === 1) {max_num = 5};
+  logger.log(`handle key ${key_id}, index ${current_index}`);
   // 處理數字鍵 (0-9)
-  if (key_id >= 0 && key_id <= 9) {
+  if (key_id >= 0 && key_id <= max_num) {
     // 1. 更新當前按鈕的文字，取消高亮
-    logger.log(`change input btn`);
     input_btns[current_index].setProperty(prop.MORE, {
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
       text: key_id.toString(),
-      normal_color: 0x202020
+      normal_color: 0x202020,
+      press_color: 0x808080,
     });
+    guess_arr[current_index] = key_id;
 
-    // 3. 移動到下一個索引，若超過 3 則回到 0
+    // 3. 驗證按下的數字合法性，上一個重複的數字會被刪除
+    for (var i = 0; i < guess_arr.length; i++) {
+      // 邏輯：如果該位置的數字等於現在按下的 key_id，且位置不是剛剛填入的位置
+      if (i !== current_index && guess_arr[i] === key_id) {
+        logger.log(`Duplicate found at index ${i}, resetting to "-"`);
+        
+        // 將該重複位置的 guess_arr 改為 20
+        guess_arr[i] = 20;
+
+        // 更新該重複位置按鈕的文字與樣式 (維持非高亮狀態)
+        input_btns[i].setProperty(prop.MORE, {
+          x: i_btn_styles[i].x,
+          y: i_btn_styles[i].y,
+          w: i_btn_styles[i].w,
+          h: i_btn_styles[i].h,
+          text: "-",
+        });
+      }
+    }
+
+    // 4. 移動到下一個索引，若超過 3 則回到 0
     current_index = (current_index + 1) % 4;
-
-    // 4. 設定下一個按鈕為高亮
+    
+    // 5. 設定下一個按鈕為高亮
     input_btns[current_index].setProperty(prop.MORE, {
-      normal_color: 0x404040
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      normal_color: 0x404040,
+      press_color: 0x808080,
     });
-  } 
-  
+  }  
+  else if (key_id >= 10 && key_id < 20) {
+    // 移動到按壓的索引
+    current_index = key_id - 10;
+
+    for (var i = 0; i < input_btns.length; i++) {
+      // 取消所有高亮
+      input_btns[i].setProperty(prop.MORE, {
+        x: i_btn_styles[i].x,
+        y: i_btn_styles[i].y,
+        w: i_btn_styles[i].w,
+        h: i_btn_styles[i].h,
+        normal_color: 0x202020,
+        press_color: 0x808080,
+      });
+    }
+
+    // 將按壓的索引高亮
+    input_btns[current_index].setProperty(prop.MORE, {
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      normal_color: 0x404040,
+      press_color: 0x808080,
+    });
+  }
   // 處理清除鍵 (20)
   else if (key_id === 20) {
     for (var i = 0; i < input_btns.length; i++) {
       // 將文字重設為 "-" 並取消所有高亮
       input_btns[i].setProperty(prop.MORE, {
-        text: key_id.toString(),
-        normal_color: 0x202020
+        x: i_btn_styles[i].x,
+        y: i_btn_styles[i].y,
+        w: i_btn_styles[i].w,
+        h: i_btn_styles[i].h,
+        text: "-",
+        normal_color: 0x202020,
+        press_color: 0x808080,
       });
+      guess_arr[i] = key_id;
     }
     // 回到第一個數字並設定高亮
     current_index = 0;
     input_btns[current_index].setProperty(prop.MORE, {
-      normal_color: 0x404040
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      normal_color: 0x404040,
+      press_color: 0x808080,
     });
   } 
   
@@ -82,25 +152,25 @@ Page({
     btn_num1 = viewContainer.createWidget(widget.BUTTON, {
       ...BTN_NUM1_STYLE,
       click_func: () => {
-        handle_keypad(11);
+        handle_keypad(10);
       }
     });
     btn_num2 = viewContainer.createWidget(widget.BUTTON, {
       ...BTN_NUM2_STYLE,
       click_func: () => {
-        handle_keypad(12);
+        handle_keypad(11);
       }
     });
     btn_num3 = viewContainer.createWidget(widget.BUTTON, {
       ...BTN_NUM3_STYLE,
       click_func: () => {
-        handle_keypad(13);
+        handle_keypad(12);
       }
     });
     btn_num4 = viewContainer.createWidget(widget.BUTTON, {
       ...BTN_NUM4_STYLE,
       click_func: () => {
-        handle_keypad(14);
+        handle_keypad(13);
       }
     });
     btn_pad7 = viewContainer.createWidget(widget.BUTTON, {
@@ -191,7 +261,8 @@ Page({
   },
   onInit(p) {
     logger.debug("page onInit invoked");
-    params = JSON.parse(p)
+    params = JSON.parse(p);
+    gamemode = params.diffcult;
   },
 
   onDestroy() {
