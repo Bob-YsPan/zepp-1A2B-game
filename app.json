@@ -156,7 +156,7 @@
     "square-320-Apollo": {
       "module": {
         "page": {
-          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page", "page/gts/history/index.page"]
         }
       },
       "platforms": [
@@ -171,7 +171,7 @@
     "square-390-Apollo": {
       "module": {
         "page": {
-          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page", "page/gts/history/index.page"]
         }
       },
       "platforms": [
@@ -183,7 +183,7 @@
     "square-390-MHS": {
       "module": {
         "page": {
-          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page", "page/gts/history/index.page"]
         }
       },
       "platforms": [
@@ -199,7 +199,7 @@
     "square-390-NXP": {
       "module": {
         "page": {
-          "pages": ["page/gts/home/index.page", "page/gts/game/index.page"]
+          "pages": ["page/gts/home/index.page", "page/gts/game/index.page", "page/gts/history/index.page"]
         }
       },
       "platforms": [

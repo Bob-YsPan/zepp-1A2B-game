@@ -8,7 +8,7 @@ import { push } from '@zos/router'
 import { localStorage } from '@zos/storage'
 
 
-const logger = Logger.getLogger("zepp-1a2b-game");
+const logger = Logger.getLogger("zepp-1a2b-home");
 
 Page({
   build() {
