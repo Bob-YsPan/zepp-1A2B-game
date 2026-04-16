@@ -19,9 +19,34 @@ export const VIEW_CONTAINER_STYLE = {
   h: DEVICE_HEIGHT, 
 }
 
-export const BTN_EASY_STYLE = {
+export const BTN_LOAD_STYLE = {
   x: 0, 
   y: CORNER_Y, 
+  w: DISPLAY_WIDTH, 
+  h: px(72), 
+  text_size: 36,
+  radius: 12,
+  normal_color: 0xc6701b,
+  press_color: 0xffc285,
+  text: "Continue",
+  ...ALIGN
+}
+
+export const TEXT_LOAD_STYLE = {
+  text: "Continue last game",
+  x: 0,
+  y: BTN_LOAD_STYLE.y + BTN_LOAD_STYLE.h + px(5),
+  w: DISPLAY_WIDTH,
+  h: px(70),
+  color: 0xffffff,
+  text_size: px(24),
+  text_style: text_style.WRAP,
+  ...ALIGN
+}
+
+export const BTN_EASY_STYLE = {
+  x: 0, 
+  y: TEXT_LOAD_STYLE.y + TEXT_LOAD_STYLE.h + px(5), 
   w: DISPLAY_WIDTH, 
   h: px(72), 
   text_size: 36,

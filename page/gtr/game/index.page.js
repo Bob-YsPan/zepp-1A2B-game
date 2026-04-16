@@ -1,6 +1,9 @@
 import { createWidget, widget, prop } from '@zos/ui'
 import { log as Logger } from '@zos/utils'
-import { VIEW_CONTAINER_STYLE, TEXT_TITLE_STYLE, TEXT_MAIN_STYLE, TEXT_THIRD_STYLE, TEXT_FORTH_STYLE, SPACER_STYLE } from './index.style'
+import { VIEW_CONTAINER_STYLE, BTN_NUM1_STYLE, BTN_NUM2_STYLE, BTN_NUM3_STYLE, BTN_NUM4_STYLE, 
+  BTN_PAD7_STYLE, BTN_PAD8_STYLE, BTN_PAD9_STYLE, BTN_PAD4_STYLE, BTN_PAD5_STYLE, BTN_PAD6_STYLE,
+  BTN_PAD1_STYLE, BTN_PAD2_STYLE, BTN_PAD3_STYLE, BTN_CLR_STYLE, BTN_PAD0_STYLE, BTN_SEND_STYLE,
+  BTN_HISTORY_STYLE, SPACER_STYLE } from './index.style'
 import { onKey, KEY_HOME, KEY_EVENT_PRESS, KEY_EVENT_RELEASE } from '@zos/interaction'
 import { back } from '@zos/router'
 import { Vibrator, VIBRATOR_SCENE_SHORT_MIDDLE, VIBRATOR_SCENE_SHORT_STRONG } from '@zos/sensor'
@@ -8,55 +11,150 @@ import { px } from '@zos/utils'
 import { getText } from '@zos/i18n'
 
 const logger = Logger.getLogger("zepp-1a2b-game");
-text_title = null;
-text_main = null;
-text_third = null;
-guess_time = null;
-stopwatch_starts = false;
-start_ts = null;
-text_forth = null;
+
 params = null;
+let btn_num1, btn_num2, btn_num3, btn_num4;
+let btn_pad7, btn_pad8, btn_pad9;
+let btn_pad4, btn_pad5, btn_pad6;
+let btn_clr, btn_pad0, btn_send;
+let btn_history;
+
+current_index = 0;
+guess_arr = [20, 20, 20, 20];
+
+// difficult
+gamemode = 0;
+
 const vibrator = new Vibrator()
 
-onKey({
-  callback: (key, keyEvent) => {
-    if (key === KEY_HOME && keyEvent === KEY_EVENT_PRESS) {
-      console.log("Key Event Press!"); 
-      if(stopwatch_starts) {
-        const stop_ts = Date.now();
-        console.log('Stopwatch Stop!');
-        const p_time = ((stop_ts - start_ts) / 1000).toFixed(2);
-        text_title.setProperty(prop.MORE, { text: getText("stopWatchTitle") });
-        text_main.setProperty(prop.MORE, { text: `${p_time}s` });
-        const time_diff = (Number(p_time) - guess_time).toFixed(2)
-        abs_diff = Math.abs(Number(time_diff))
-        if(abs_diff <= 0.1) {
-          text_third.setProperty(prop.MORE, { h: px(42), color: 0x00ffff });
-        } else if(abs_diff <= 0.5) {
-          text_third.setProperty(prop.MORE, { h: px(42), color: 0x00ff00 });
-        } else {
-          text_third.setProperty(prop.MORE, { h: px(42), color: 0xff0000 });
-        }
-        if(Number(time_diff > 0)) {
-          text_third.setProperty(prop.MORE, { text: `+${time_diff}s` });
-        } else {
-          text_third.setProperty(prop.MORE, { text: `${time_diff}s` });
-        }
-        text_forth.setProperty(prop.MORE, { y: TEXT_THIRD_STYLE.y + px(42) + px(5), text: getText("newgameHint")});
-        vibrator.setMode(VIBRATOR_SCENE_SHORT_STRONG)
-        vibrator.start();
-      }
-    } else if (key === KEY_HOME && keyEvent === KEY_EVENT_RELEASE) {
-      console.log("Key Event Release!"); 
-      if (stopwatch_starts){
-        stopwatch_starts = false;
-      } else {
-        back();
+function handle_keypad(key_id) {
+  input_btns = [btn_num1, btn_num2, btn_num3, btn_num4];
+  i_btn_styles = [BTN_NUM1_STYLE, BTN_NUM2_STYLE, BTN_NUM3_STYLE, BTN_NUM4_STYLE];
+  max_num = 9
+  if(gamemode === 1) {max_num = 5};
+  logger.log(`handle key ${key_id}, index ${current_index}`);
+  // 處理數字鍵 (0-9)
+  if (key_id >= 0 && key_id <= max_num) {
+    // 1. 更新當前按鈕的文字，取消高亮
+    input_btns[current_index].setProperty(prop.MORE, {
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      text: key_id.toString(),
+      normal_color: 0x202020,
+      press_color: 0x808080,
+    });
+    guess_arr[current_index] = key_id;
+    // Vibrate short
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
+    vibrator.start();
+
+    // 3. 驗證按下的數字合法性，上一個重複的數字會被刪除
+    for (var i = 0; i < guess_arr.length; i++) {
+      // 邏輯：如果該位置的數字等於現在按下的 key_id，且位置不是剛剛填入的位置
+      if (i !== current_index && guess_arr[i] === key_id) {
+        logger.log(`Duplicate found at index ${i}, resetting to "-"`);
+        
+        // 將該重複位置的 guess_arr 改為 20
+        guess_arr[i] = 20;
+
+        // 更新該重複位置按鈕的文字與樣式 (維持非高亮狀態)
+        input_btns[i].setProperty(prop.MORE, {
+          x: i_btn_styles[i].x,
+          y: i_btn_styles[i].y,
+          w: i_btn_styles[i].w,
+          h: i_btn_styles[i].h,
+          text: "-",
+        });
       }
     }
-    return true
-  },
-})
+
+    // 4. 移動到下一個索引，若超過 3 則回到 0
+    current_index = (current_index + 1) % 4;
+    
+    // 5. 設定下一個按鈕為高亮
+    input_btns[current_index].setProperty(prop.MORE, {
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      normal_color: 0x404040,
+      press_color: 0x808080,
+    });
+  }  
+  else if (key_id >= 10 && key_id < 20) {
+    // 移動到按壓的索引
+    current_index = key_id - 10;
+
+    for (var i = 0; i < input_btns.length; i++) {
+      // 取消所有高亮
+      input_btns[i].setProperty(prop.MORE, {
+        x: i_btn_styles[i].x,
+        y: i_btn_styles[i].y,
+        w: i_btn_styles[i].w,
+        h: i_btn_styles[i].h,
+        normal_color: 0x202020,
+        press_color: 0x808080,
+      });
+    }
+
+    // 將按壓的索引高亮
+    input_btns[current_index].setProperty(prop.MORE, {
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      normal_color: 0x404040,
+      press_color: 0x808080,
+    });
+
+    // Vibrate short
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
+    vibrator.start();
+  }
+  // 處理清除鍵 (20)
+  else if (key_id === 20) {
+    for (var i = 0; i < input_btns.length; i++) {
+      // 將文字重設為 "-" 並取消所有高亮
+      input_btns[i].setProperty(prop.MORE, {
+        x: i_btn_styles[i].x,
+        y: i_btn_styles[i].y,
+        w: i_btn_styles[i].w,
+        h: i_btn_styles[i].h,
+        text: "-",
+        normal_color: 0x202020,
+        press_color: 0x808080,
+      });
+      guess_arr[i] = key_id;
+    }
+    // 回到第一個數字並設定高亮
+    current_index = 0;
+    input_btns[current_index].setProperty(prop.MORE, {
+      x: i_btn_styles[current_index].x,
+      y: i_btn_styles[current_index].y,
+      w: i_btn_styles[current_index].w,
+      h: i_btn_styles[current_index].h,
+      normal_color: 0x404040,
+      press_color: 0x808080,
+    });
+
+    // Vibrate strong
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_STRONG);
+    vibrator.start();
+  } 
+  
+  // 處理傳送鍵 (21)
+  else if (key_id === 21) {
+    send_data();
+  }
+}
+
+// 預留的擴充函式
+function send_data() {
+  // 在此實作傳送邏輯
+  console.log("Data sent!");
+}
 
 Page({
   build() {
@@ -64,91 +162,115 @@ Page({
     const viewContainer = createWidget(widget.VIEW_CONTAINER, {
       ...VIEW_CONTAINER_STYLE
     })
-    text_title = viewContainer.createWidget(widget.TEXT, {
-      ...TEXT_TITLE_STYLE,
+    btn_num1 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_NUM1_STYLE,
+      click_func: () => {
+        handle_keypad(10);
+      }
     });
-    text_main = viewContainer.createWidget(widget.TEXT, {
-      ...TEXT_MAIN_STYLE,
+    btn_num2 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_NUM2_STYLE,
+      click_func: () => {
+        handle_keypad(11);
+      }
     });
-    text_third = viewContainer.createWidget(widget.TEXT, {
-      ...TEXT_THIRD_STYLE,
+    btn_num3 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_NUM3_STYLE,
+      click_func: () => {
+        handle_keypad(12);
+      }
     });
-    text_forth = viewContainer.createWidget(widget.TEXT, {
-      ...TEXT_FORTH_STYLE,
+    btn_num4 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_NUM4_STYLE,
+      click_func: () => {
+        handle_keypad(13);
+      }
+    });
+    btn_pad7 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD7_STYLE,
+      click_func: () => {
+        handle_keypad(7);
+      }
+    });
+    btn_pad8 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD8_STYLE,
+      click_func: () => {
+        handle_keypad(8);
+      }
+    });
+    btn_pad9 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD9_STYLE,
+      click_func: () => {
+        handle_keypad(9);
+      }
+    });
+    btn_pad4 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD4_STYLE,
+      click_func: () => {
+        handle_keypad(4);
+      }
+    });
+    btn_pad5 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD5_STYLE,
+      click_func: () => {
+        handle_keypad(5);
+      }
+    });
+    btn_pad6 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD6_STYLE,
+      click_func: () => {
+        handle_keypad(6);
+      }
+    });
+    btn_pad1 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD1_STYLE,
+      click_func: () => {
+        handle_keypad(1);
+      }
+    });
+    btn_pad2 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD2_STYLE,
+      click_func: () => {
+        handle_keypad(2);
+      }
+    });
+    btn_pad3 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD3_STYLE,
+      click_func: () => {
+        handle_keypad(3);
+      }
+    });
+    btn_clr = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_CLR_STYLE,
+      click_func: () => {
+        handle_keypad(20);
+      }
+    });
+    btn_pad0 = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_PAD0_STYLE,
+      click_func: () => {
+        handle_keypad(0);
+      }
+    });
+    btn_send = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_SEND_STYLE,
+      click_func: () => {
+        handle_keypad(21);
+      }
+    });
+    btn_history = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_HISTORY_STYLE,
+      click_func: () => {
+      }
     });
     spacer = viewContainer.createWidget(widget.TEXT, {
       ...SPACER_STYLE
-    })
-  const { diffcult } = params;
-
-  // 1. 統一初始化變數 (單位統一為 ms)
-  switch (diffcult) {
-    case 1:
-      countdown_t = 3000;
-      guess_time = Math.floor(Math.random() * 10) + 1;
-      break;
-    case 2:
-      countdown_t = (Math.floor(Math.random() * 5) + 1) * 1000;
-      guess_time = Math.floor(Math.random() * 21) + 10;
-      break;
-    default: // 難度 3 或其他
-      countdown_t = Math.floor(Math.random() * 4001) + 1000;
-      do {
-        guess_time = Number(((Math.floor(Math.random() * 201) + 100) / 10).toFixed(1));
-      } while (guess_time % 1 === 0); // 確保是小數
-      break;
-  }
-  // 2. 共通 UI 更新
-  text_title.setProperty(prop.MORE, { text: getText("gameTitle") });
-  text_main.setProperty(prop.MORE, { text: `${guess_time}s` });
-
-  // 3. 處理倒數顯示邏輯
-  if (diffcult === 1) {
-    const seconds = countdown_t / 1000;
-    // 設置初始顯示
-    text_third.setProperty(prop.MORE, { 
-      text: `${getText("countdownBefore")}${seconds}s${getText("countdownAfter")}!` 
     });
-
-    // 建立每一秒的計時器
-    for (let i = seconds; i >= 1; i--) {
-      const delay = (seconds - i) * 1000;
-      setTimeout(() => {
-        text_third.setProperty(prop.MORE, {
-          text: `${getText("countdownBefore")}${i}s${getText("countdownAfter")}!`
-        });
-        vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
-        vibrator.start();
-      }, delay);
-    }
-  } else {
-    // 難度 2 與 3 隱藏倒數
-    text_third.setProperty(prop.MORE, { text: getText("countdownHide") });
-    if (diffcult === 2) {
-      const seconds = countdown_t / 1000;
-    for (let i = seconds; i >= 1; i--) {
-      const delay = (seconds - i) * 1000;
-      setTimeout(() => {
-        vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
-        vibrator.start();
-      }, delay);
-      }
-    }
-  }
-  // 4. 遊戲正式開始的定時任務
-  setTimeout(() => {
-    text_third.setProperty(prop.MORE, { text: getText("stopgameHint") });
-    start_ts = Date.now();
-    stopwatch_starts = true;
-    console.log(start_ts);
-    
-    vibrator.setMode(VIBRATOR_SCENE_SHORT_STRONG);
-    vibrator.start();
-  }, countdown_t);
   },
   onInit(p) {
     logger.debug("page onInit invoked");
-    params = JSON.parse(p)
+    params = JSON.parse(p);
+    gamemode = params.diffcult;
   },
 
   onDestroy() {

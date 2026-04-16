@@ -1,7 +1,11 @@
 import { createWidget, widget, prop } from '@zos/ui'
 import { log as Logger } from '@zos/utils'
-import { BTN_EASY_STYLE, BTN_MEDIUM_STYLE, BTN_HARD_STYLE, TEXT_EASY_STYLE, TEXT_MEDIUM_STYLE, TEXT_HARD_STYLE, VIEW_CONTAINER_STYLE, SPACER_STYLE } from './index.style'
+import { BTN_EASY_STYLE, BTN_MEDIUM_STYLE, BTN_HARD_STYLE, TEXT_EASY_STYLE, TEXT_MEDIUM_STYLE,
+  TEXT_HARD_STYLE, VIEW_CONTAINER_STYLE, SPACER_STYLE,
+  TEXT_LOAD_STYLE, BTN_LOAD_STYLE } from './index.style'
+import { showToast } from '@zos/interaction'
 import { push } from '@zos/router'
+import { localStorage } from '@zos/storage'
 
 
 const logger = Logger.getLogger("zepp-1a2b-game");
@@ -12,6 +16,28 @@ Page({
     const viewContainer = createWidget(widget.VIEW_CONTAINER, {
       ...VIEW_CONTAINER_STYLE
     })
+    btn_load = viewContainer.createWidget(widget.BUTTON, {
+      ...BTN_LOAD_STYLE,
+      click_func: () => {
+        current_diffcult = localStorage.getItem("gamemode")
+        if (current_diffcult === undefined){
+          showToast({
+            content: 'No saves yet...',
+          })
+        }
+        else {
+          push({
+            url: 'page/gts/game/index.page',
+            params: {
+              diffcult: 0
+            }
+          })
+        }
+      }
+    });
+    text_load = viewContainer.createWidget(widget.TEXT, {
+      ...TEXT_LOAD_STYLE,
+    });
     btn_easy = viewContainer.createWidget(widget.BUTTON, {
       ...BTN_EASY_STYLE,
       click_func: () => {

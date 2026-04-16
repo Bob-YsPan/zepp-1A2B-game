@@ -252,22 +252,9 @@ export const BTN_HISTORY_STYLE = {
   ...ALIGN
 }
 
-export const BTN_NEWGAME_STYLE = {
-  x: 0, 
-  y: BTN_HISTORY_STYLE.y + BTN_HISTORY_STYLE.h + px(10), 
-  w: DISPLAY_WIDTH, 
-  h: px(72), 
-  text_size: 36,
-  radius: 12,
-  normal_color: 0xc6701b,
-  press_color: 0xffc285,
-  text: "New Game",
-  ...ALIGN
-}
-
 export const SPACER_STYLE = {
   x: 0,
-  y: BTN_NEWGAME_STYLE.y + BTN_NEWGAME_STYLE.h,
+  y: BTN_HISTORY_STYLE.y + BTN_HISTORY_STYLE.h,
   w: DISPLAY_WIDTH,
   h: SPACER_SIZE,
 }

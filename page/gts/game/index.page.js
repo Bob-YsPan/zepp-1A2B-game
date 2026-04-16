@@ -3,8 +3,8 @@ import { log as Logger } from '@zos/utils'
 import { VIEW_CONTAINER_STYLE, BTN_NUM1_STYLE, BTN_NUM2_STYLE, BTN_NUM3_STYLE, BTN_NUM4_STYLE, 
   BTN_PAD7_STYLE, BTN_PAD8_STYLE, BTN_PAD9_STYLE, BTN_PAD4_STYLE, BTN_PAD5_STYLE, BTN_PAD6_STYLE,
   BTN_PAD1_STYLE, BTN_PAD2_STYLE, BTN_PAD3_STYLE, BTN_CLR_STYLE, BTN_PAD0_STYLE, BTN_SEND_STYLE,
-  BTN_HISTORY_STYLE, BTN_NEWGAME_STYLE, SPACER_STYLE } from './index.style'
-import { onKey, KEY_HOME, KEY_EVENT_PRESS, KEY_EVENT_RELEASE } from '@zos/interaction'
+  BTN_HISTORY_STYLE, SPACER_STYLE } from './index.style'
+import { localStorage } from '@zos/storage'
 import { back } from '@zos/router'
 import { Vibrator, VIBRATOR_SCENE_SHORT_MIDDLE, VIBRATOR_SCENE_SHORT_STRONG } from '@zos/sensor'
 import { px } from '@zos/utils'
@@ -17,19 +17,21 @@ let btn_num1, btn_num2, btn_num3, btn_num4;
 let btn_pad7, btn_pad8, btn_pad9;
 let btn_pad4, btn_pad5, btn_pad6;
 let btn_clr, btn_pad0, btn_send;
-let btn_history, btn_newgame;
+let btn_history;
 
 current_index = 0;
+max_num = 9;
 guess_arr = [20, 20, 20, 20];
+ans_number = [20, 20, 20, 20];
 
 // difficult
 gamemode = 0;
 
+const vibrator = new Vibrator()
+
 function handle_keypad(key_id) {
   input_btns = [btn_num1, btn_num2, btn_num3, btn_num4];
   i_btn_styles = [BTN_NUM1_STYLE, BTN_NUM2_STYLE, BTN_NUM3_STYLE, BTN_NUM4_STYLE];
-  max_num = 9
-  if(gamemode === 1) {max_num = 5};
   logger.log(`handle key ${key_id}, index ${current_index}`);
   // 處理數字鍵 (0-9)
   if (key_id >= 0 && key_id <= max_num) {
@@ -44,6 +46,9 @@ function handle_keypad(key_id) {
       press_color: 0x808080,
     });
     guess_arr[current_index] = key_id;
+    // Vibrate short
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
+    vibrator.start();
 
     // 3. 驗證按下的數字合法性，上一個重複的數字會被刪除
     for (var i = 0; i < guess_arr.length; i++) {
@@ -103,6 +108,10 @@ function handle_keypad(key_id) {
       normal_color: 0x404040,
       press_color: 0x808080,
     });
+
+    // Vibrate short
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_MIDDLE);
+    vibrator.start();
   }
   // 處理清除鍵 (20)
   else if (key_id === 20) {
@@ -129,6 +138,10 @@ function handle_keypad(key_id) {
       normal_color: 0x404040,
       press_color: 0x808080,
     });
+
+    // Vibrate strong
+    vibrator.setMode(VIBRATOR_SCENE_SHORT_STRONG);
+    vibrator.start();
   } 
   
   // 處理傳送鍵 (21)
@@ -250,11 +263,6 @@ Page({
       click_func: () => {
       }
     });
-    btn_newgame = viewContainer.createWidget(widget.BUTTON, {
-      ...BTN_NEWGAME_STYLE,
-      click_func: () => {
-      }
-    });
     spacer = viewContainer.createWidget(widget.TEXT, {
       ...SPACER_STYLE
     });
@@ -262,7 +270,43 @@ Page({
   onInit(p) {
     logger.debug("page onInit invoked");
     params = JSON.parse(p);
-    gamemode = params.diffcult;
+    // 難度值準備
+    if(params.diffcult > 0){
+      gamemode = params.diffcult;
+      // 清除資料
+      localStorage.clear();
+      // 儲存難度值
+      localStorage.setItem("gamemode", params.diffcult);
+      // 難度為簡單時限制最大數字
+      if(gamemode === 1) {max_num = 5};
+      // 1. 建立一個包含 0 到 max_num 的候選池
+      // 例如 max_num 為 5，候選池就是 [0, 1, 2, 3, 4, 5]
+      let candidates = [];
+      for (let i = 0; i <= max_num; i++) {
+          candidates.push(i);
+      }
+      // 2. 從候選池中隨機抽取數字填充到 ans_number
+      for (let i = 0; i < ans_number.length; i++) {
+          // 隨機產生一個候選池的索引值
+          const randomIndex = Math.floor(Math.random() * candidates.length);
+          // 將該位置的數字取出並存入 ans_number，同時從候選池中移除（避免重複）
+          ans_number[i] = candidates.splice(randomIndex, 1)[0];
+      }
+      // 儲存答案
+      localStorage.setItem("ans_number", ans_number);
+      logger.log(`Generated answer = ${ans_number}`)
+      logger.log(`Current gamemode = ${gamemode}`)
+    }
+    else {
+      // 讀取難度值
+      gamemode = localStorage.getItem("gamemode")
+      // 讀取答案
+      ans_number = localStorage.getItem("ans_number")
+      // 難度為簡單時限制最大數字
+      if(gamemode === 1) {max_num = 5};
+      logger.log(`Loaded answer = ${ans_number}`)
+      logger.log(`Loaded gamemode = ${gamemode}`)
+    }    
   },
 
   onDestroy() {
