@@ -1,39 +1,44 @@
+msgid "continueBtn"
+msgstr "继续"
+
+msgid "continueHint"
+msgstr "继续之前的游戏"
+
+msgid "nosaveHint"
+msgstr "还没有存档..."
+
 msgid "easyBtn"
 msgstr "简单"
 
 msgid "easyHint"
-msgstr "固定3秒倒数启动,完全提示,\n目标1~10秒"
+msgstr "猜由 1~5 组成的数字, 没有次数限制"
 
 msgid "mediumBtn"
 msgstr "中等"
 
 msgid "mediumHint"
-msgstr "随机1~5秒后启动,震动提示,\n目标10~30秒"
+msgstr "猜由 1~10 组成的数字, 没有次数限制"
 
 msgid "hardBtn"
 msgstr "困难"
 
 msgid "hardHint"
-msgstr "随机1~5秒后启动,无提示,\n目标时间含小数!"
+msgstr "猜由 1~10 组成的数字,\n只有 10 次机会!"
 
-msgid "gameTitle"
-msgstr "尝试在以下时间\n停止秒表"
+msgid "historyBtn"
+msgstr "历史纪录"
 
-msgid "stopWatchTitle"
-msgstr "你停止秒表的\n时间为"
+msgid "checkHint"
+msgstr "请检查你的输入!"
+
+msgid "guessedHint"
+msgstr "你猜中了!"
+
+msgid "failHint"
+msgstr "你输了!\n答案是:"
+
+msgid "remainHint"
+msgstr "剩余次数:"
 
 msgid "newgameHint"
-msgstr "按下按钮或是侧滑\n来开始新游戏!"
-
-msgid "countdownBefore"
-msgstr " "
-
-msgid "countdownAfter"
-msgstr " 后启动秒表"
-
-msgid "countdownHide"
-msgstr "准备好了吗?"
-
-msgid "stopgameHint"
-msgstr "按下按钮来\n停止秒表..."
-
+msgstr "侧滑来开始\n新游戏!"

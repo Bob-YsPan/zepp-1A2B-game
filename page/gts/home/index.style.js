@@ -28,12 +28,12 @@ export const BTN_LOAD_STYLE = {
   radius: 12,
   normal_color: 0xc6701b,
   press_color: 0xffc285,
-  text: "Continue",
+  text: getText("continueBtn"),
   ...ALIGN
 }
 
 export const TEXT_LOAD_STYLE = {
-  text: "Continue last game",
+  text: getText("continueHint"),
   x: 0,
   y: BTN_LOAD_STYLE.y + BTN_LOAD_STYLE.h + px(5),
   w: DISPLAY_WIDTH,

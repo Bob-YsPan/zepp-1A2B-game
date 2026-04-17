@@ -20,7 +20,7 @@ export const VIEW_CONTAINER_STYLE = {
 }
 
 export const TEXT_TITLE_STYLE = {
-  text: "History",
+  text: getText("historyBtn"),
   x: 0,
   y: CORNER_Y,
   w: DISPLAY_WIDTH,

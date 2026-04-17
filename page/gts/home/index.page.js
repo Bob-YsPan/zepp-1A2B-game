@@ -6,6 +6,7 @@ import { BTN_EASY_STYLE, BTN_MEDIUM_STYLE, BTN_HARD_STYLE, TEXT_EASY_STYLE, TEXT
 import { showToast } from '@zos/interaction'
 import { push } from '@zos/router'
 import { localStorage } from '@zos/storage'
+import { getText } from '@zos/i18n'
 
 
 const logger = Logger.getLogger("zepp-1a2b-home");
@@ -22,7 +23,7 @@ Page({
         current_diffcult = localStorage.getItem("gamemode")
         if (current_diffcult === undefined){
           showToast({
-            content: 'No saves yet...',
+            content: getText("nosaveHint"),
           })
         }
         else {

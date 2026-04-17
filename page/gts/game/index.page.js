@@ -8,7 +8,6 @@ import { localStorage } from '@zos/storage'
 import { showToast } from '@zos/interaction'
 import { Vibrator, VIBRATOR_SCENE_SHORT_MIDDLE, VIBRATOR_SCENE_SHORT_STRONG } from '@zos/sensor'
 import { push } from '@zos/router'
-import { px } from '@zos/utils'
 import { getText } from '@zos/i18n'
 
 const logger = Logger.getLogger("zepp-1a2b-game");
@@ -162,7 +161,7 @@ function handle_keypad(key_id) {
       for (let i = 0; i < guess_arr.length; i++) {
         if (guess_arr[i] === 20) {
           showToast({
-            content: 'Check your input!',
+            content: getText("checkHint"),
           })
           invaild = true;
           break;
@@ -256,18 +255,18 @@ function guess_check() {
   // 顯示猜測狀態
   if (a === 4){
     showToast({
-      content: 'You Guessed!',
+      content: getText("guessedHint"),
     })
   }
   else if (tries >= 10) {
     showToast({
-      content: `You Failed!\nAns: ${ans_number[0]}${ans_number[1]}${ans_number[2]}${ans_number[3]}`,
+      content: `${getText("failHint")} ${ans_number[0]}${ans_number[1]}${ans_number[2]}${ans_number[3]}`,
     })
   }
   else {
     msg = `${a}A${b}B`
     if (gamemode === 3) {
-      msg += `\n${10 - tries} tries remaining`
+      msg += `\n${getText("remainHint")}: ${10 - tries}`
     }
     showToast({
       content: msg,
@@ -305,7 +304,7 @@ function guess_check() {
     // 無法再猜測提示使用者回首頁
     else {
       showToast({
-        content: 'Swipe back to\nStart the\nNew game!',
+        content: getText("newgameHint"),
       })
     }
   }, 2000);
@@ -451,7 +450,7 @@ Page({
         guess_arr[i] = 20;
       }
       showToast({
-        content: 'Swipe back to\nStart the\nNew game!',
+        content: getText("newgameHint"),
       });
     };
   },

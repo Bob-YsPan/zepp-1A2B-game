@@ -1,3 +1,12 @@
+msgid "continueBtn"
+msgstr "Continue"
+
+msgid "continueHint"
+msgstr "Continue last game"
+
+msgid "nosaveHint"
+msgstr "No saves yet..."
+
 msgid "easyBtn"
 msgstr "Easy"
 
@@ -16,24 +25,20 @@ msgstr "Hard"
 msgid "hardHint"
 msgstr "Guess numbers between 1~10,\nOnly 10 times of the chances!"
 
-msgid "gameTitle"
-msgstr "Try to stop the stopwatch at"
+msgid "historyBtn"
+msgstr "History"
 
-msgid "stopWatchTitle"
-msgstr "You stop the stopwatch at"
+msgid "checkHint"
+msgstr "Check your input!"
+
+msgid "guessedHint"
+msgstr "You Guessed!"
+
+msgid "failHint"
+msgstr "You Failed!\nAns:"
+
+msgid "remainHint"
+msgstr "Remaining tries:"
 
 msgid "newgameHint"
-msgstr "Press button or swipe to start the new game!"
-
-msgid "countdownBefore"
-msgstr "Stopwatch starts in "
-
-msgid "countdownAfter"
-msgstr " "
-
-msgid "countdownHide"
-msgstr "Ready?"
-
-msgid "stopgameHint"
-msgstr "Press button to stop..."
-
+msgstr "Swipe back to\nStart the\nNew game!"
