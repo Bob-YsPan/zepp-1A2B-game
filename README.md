@@ -1,2 +1,2 @@
 # zepp-1A2B-game
-1A2B game for zepp os (Still in development!)
+1A2B game for zepp os
