@@ -1,4 +1,4 @@
-import { createWidget, widget, prop } from '@zos/ui'
+import { createWidget, widget } from '@zos/ui'
 import { log as Logger } from '@zos/utils'
 import { BTN_EASY_STYLE, BTN_MEDIUM_STYLE, BTN_HARD_STYLE, TEXT_EASY_STYLE, TEXT_MEDIUM_STYLE,
   TEXT_HARD_STYLE, VIEW_CONTAINER_STYLE, SPACER_STYLE,

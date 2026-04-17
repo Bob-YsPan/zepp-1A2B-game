@@ -266,7 +266,7 @@ function guess_check() {
   else {
     msg = `${a}A${b}B`
     if (gamemode === 3) {
-      msg += `\n${getText("remainHint")}: ${10 - tries}`
+      msg += `\n${getText("remainHint")} ${10 - tries}`
     }
     showToast({
       content: msg,

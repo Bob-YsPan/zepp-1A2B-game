@@ -5,10 +5,10 @@ import { px } from '@zos/utils'
 
 export const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = getDeviceInfo();
 
-const CORNER_X = px(42);
-const CORNER_Y = 70;
-const DISPLAY_WIDTH = DEVICE_WIDTH - 2 * px(42);
-const SPACER_SIZE = px(42);
+const CORNER_X = DEVICE_WIDTH / 6;
+const CORNER_Y = DEVICE_HEIGHT / 6 + px(12);
+const DISPLAY_WIDTH = DEVICE_WIDTH - DEVICE_WIDTH / 3;
+const SPACER_SIZE = DEVICE_HEIGHT / 6 + px(12);
 
 const ALIGN = { align_h: align.CENTER_H, align_v: align.CENTER_V }
 

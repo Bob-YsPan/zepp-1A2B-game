@@ -11,19 +11,19 @@ msgid "easyBtn"
 msgstr "简单"
 
 msgid "easyHint"
-msgstr "猜由 1~5 组成的数字, 没有次数限制"
+msgstr "猜由 0~5 组成的数字,\n没有次数限制"
 
 msgid "mediumBtn"
 msgstr "中等"
 
 msgid "mediumHint"
-msgstr "猜由 1~10 组成的数字, 没有次数限制"
+msgstr "猜由 0~9 组成的数字,\n没有次数限制"
 
 msgid "hardBtn"
 msgstr "困难"
 
 msgid "hardHint"
-msgstr "猜由 1~10 组成的数字,\n只有 10 次机会!"
+msgstr "猜由 0~9 组成的数字,\n只有 10 次机会!"
 
 msgid "historyBtn"
 msgstr "历史纪录"

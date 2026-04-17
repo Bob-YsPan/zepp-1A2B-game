@@ -28,7 +28,7 @@
     "round-360-Apollo": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -40,7 +40,7 @@
     "round-416-MHS": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -51,7 +51,7 @@
     "round-416-NXP": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -63,7 +63,7 @@
     "round-454-NXP": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -79,7 +79,7 @@
     "round-466-MHS": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -104,7 +104,7 @@
     "round-466-NXP": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -117,7 +117,7 @@
     "round-480-MHS": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [
@@ -141,7 +141,7 @@
     "round-480-NXP": {
       "module": {
         "page": {
-          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page"]
+          "pages": ["page/gtr/home/index.page", "page/gtr/game/index.page", "page/gtr/history/index.page"]
         }
       },
       "platforms": [

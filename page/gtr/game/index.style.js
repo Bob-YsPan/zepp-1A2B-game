@@ -246,9 +246,9 @@ export const BTN_HISTORY_STYLE = {
   h: px(72), 
   text_size: 36,
   radius: 12,
-  normal_color: 0xc6701b,
-  press_color: 0xffc285,
-  text: "History",
+  normal_color: 0x404040,
+  press_color: 0x808080,
+  text: getText("historyBtn"),
   ...ALIGN
 }
 

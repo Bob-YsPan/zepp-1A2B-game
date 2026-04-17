@@ -11,19 +11,19 @@ msgid "easyBtn"
 msgstr "Easy"
 
 msgid "easyHint"
-msgstr "Guess numbers between 1~5, unlimited chances"
+msgstr "Guess numbers between 0~5,\nunlimited chances"
 
 msgid "mediumBtn"
 msgstr "Medium"
 
 msgid "mediumHint"
-msgstr "Guess numbers between 1~10, unlimited chances"
+msgstr "Guess numbers between 0~9,\nunlimited chances"
 
 msgid "hardBtn"
 msgstr "Hard"
 
 msgid "hardHint"
-msgstr "Guess numbers between 1~10,\nOnly 10 times of the chances!"
+msgstr "Guess numbers between 0~9,\nOnly 10 times of the chances!"
 
 msgid "historyBtn"
 msgstr "History"
